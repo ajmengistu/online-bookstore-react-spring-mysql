@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Back-end') {            
             steps {
-                sh 'mvn --version'
+                echo 'mvn --version'
             }
         }
         stage('Front-end') {            
             steps {
-                sh 'node --version'
+                echo 'node --version'
             }
         }
     }
