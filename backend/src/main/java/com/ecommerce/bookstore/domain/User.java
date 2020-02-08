@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  * A user.
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,11 +27,10 @@ public class User implements Serializable {
     @Column(name = "first_name", length = 50)
     private String firstName;
 
-
-    public User(){
+    public User() {
     }
 
-    public User(String firstName){
+    public User(String firstName) {
         this.firstName = firstName;
     }
 
@@ -80,7 +79,7 @@ public class User implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }  
+    }
 
     @Override
     public String toString() {
