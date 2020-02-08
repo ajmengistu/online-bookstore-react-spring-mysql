@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+
+// A User. Note: Update User with React Hooks.
 class User extends React.Component {
   constructor() {
     super();
@@ -9,19 +11,31 @@ class User extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8080/greeting").then(response => {
+    // axios.get("http://localhost:8080/greeting").then(response => {
+    axios.get(this.props.url).then(response => {
+      console.log(response);
       const users = response.data;
-      this.setState({ users });
+      this.setState({
+        users
+      });
       console.log(users);
     });
   }
+
   render() {
     return (
-      <ul>
-        {this.state.users.map((user, index) => (
-          <li key={index}>{user.firstName}</li>
-        ))}
-      </ul>
+      <div>
+        <p>User Component</p>
+        <ul data-testid="user-name">
+          {this.state.users.length === 0 ? (
+            <p data-testid="loading">Loading....</p>
+          ) : (
+            this.state.users.map((user, index) => (
+              <li key={index}> {user.name} </li>
+            ))
+          )}
+        </ul>
+      </div>
     );
   }
 }
