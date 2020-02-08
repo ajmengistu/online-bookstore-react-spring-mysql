@@ -11,7 +11,6 @@ class User extends React.Component {
   }
 
   componentDidMount() {
-    // axios.get("http://localhost:8080/greeting").then(response => {
     axios.get(this.props.url).then(response => {
       console.log(response);
       const users = response.data;
@@ -31,7 +30,7 @@ class User extends React.Component {
             <p data-testid="loading">Loading....</p>
           ) : (
             this.state.users.map((user, index) => (
-              <li key={index}> {user.name} </li>
+              <li key={index}> {user.firstName} </li>
             ))
           )}
         </ul>

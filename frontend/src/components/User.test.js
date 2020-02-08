@@ -16,23 +16,31 @@ const mockCall = () => {
   axiosMock.get.mockResolvedValueOnce({
     data: [
       {
-        name: "John"
+        firstName: "John"
       },
       {
-        name: "Thomas"
+        firstName: "Thomas"
       }
     ]
   });
 };
 
 describe("Test <User /> component", () => {
-  test("Show loader when it's fetching data from api", async () => {
-    mockCall();
+  test("Show loader when it's fetching data from api", () => {
     const url = "/users";
+    mockCall();
+
     const { getByText, getAllByText } = render(<User url={url} />);
     expect(getByText(/Loading..../)).toBeInTheDocument;
-    await waitForElement(() => getAllByText("Thomas"));
+  });
 
+  test("Successfully fetching data from axios mock api", async () => {
+    const url = "/users";
+    mockCall();
+
+    const { getByText, getAllByText } = render(<User url={url} />);
+
+    await waitForElement(() => getAllByText("Thomas"));
     expect(axiosMock.get).toHaveBeenCalledTimes(1);
     expect(axiosMock.get).toHaveBeenCalledWith(url);
   });
